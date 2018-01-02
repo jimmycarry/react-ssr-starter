@@ -5,26 +5,8 @@ const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const StatsPlugin = require('stats-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const BaseConfig = require('./config/base');
 
-const  baseCSSLoader = [
-    {
-        loader: 'css-loader',
-        options: {
-            modules: true,
-            importLoaders: 1,
-            localIdentName: '[name]__[local]_[hash:base64:5]',
-            sourceMap: true
-        }
-    },
-    {
-        loader: 'postcss-loader',
-        options: {
-            plugins: (loader) => [
-                require('autoprefixer')({ browsers: ['last 3 versions', 'iOS 9'] }),
-            ]
-        }
-    }
-];
 
 module.exports = [
     {
@@ -48,47 +30,15 @@ module.exports = [
         },
         module: {
             rules: [
-                {
-                    exclude: [
-                        /\.html$/,
-                        /\.(ts|tsx)$/,
-                        /\.(js|jsx)$/,
-                        /\.css$/,
-                        /\.less$/,
-                        /\.json$/,
-                        /\.bmp$/,
-                        /\.gif$/,
-                        /\.jpe?g$/,
-                        /\.png$/,
-                      ],
-                      loader: require.resolve('file-loader'),
-                      options: {
-                        name: '[name].[hash:8].[ext]',
-                      },
-                },
+                ...BaseConfig.baseFileLoader,
 
-                {
-                    test: /\.tsx?$/,
-                    use: [
-                        'babel-loader?cacheDirectory',
-                        {
-                            loader: 'ts-loader',
-                        }
-                    ],
-                    exclude: /node_modules/
-                },
-                {
-                    test: /\.jsx?$/,
-                    use: [
-                        'babel-loader?cacheDirectory'
-                    ]
-                },
+                ...BaseConfig.baseTSLoader,
                 {
                     test: /\.less$/,
                     use: ExtractTextPlugin.extract({
                         fallback: 'style-loader',
                         use: [
-                            ...baseCSSLoader,
+                            ...BaseConfig.baseCSSLoader,
                             {
                                 loader: 'less-loader'
                             }
@@ -100,18 +50,11 @@ module.exports = [
                     use: ExtractTextPlugin.extract({
                         fallback: 'style-loader',
                         use: [
-                            ...baseCSSLoader
+                            ...BaseConfig.baseCSSLoader
                         ]
                     })
                 },
-                {
-                    test: /\.(jpe?g|png|gif)/,
-                    // loader: [
-                    //     'url?limit=4000&name=images/[name][hash:8].[ext]',
-                    //     'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}'
-                    // ]
-                    loader: 'url-loader?limit=4000&name=[name][hash:8].[ext]',
-                },
+                ...BaseConfig.baseUrlLoader
             ]
         },
         plugins: [
@@ -160,47 +103,16 @@ module.exports = [
         },
         module: {
             rules: [
-                {
-                    exclude: [
-                        /\.html$/,
-                        /\.(ts|tsx)$/,
-                        /\.(js|jsx)$/,
-                        /\.css$/,
-                        /\.less$/,
-                        /\.json$/,
-                        /\.bmp$/,
-                        /\.gif$/,
-                        /\.jpe?g$/,
-                        /\.png$/,
-                      ],
-                      loader: require.resolve('file-loader'),
-                      options: {
-                        name: '[name].[hash:8].[ext]',
-                      },
-                },
+                ...BaseConfig.baseFileLoader,
 
-                {
-                    test: /\.tsx?$/,
-                    use: [
-                        'babel-loader?cacheDirectory',
-                        {
-                            loader: 'ts-loader',
-                        }
-                    ],
-                    exclude: /node_modules/
-                },
-                {
-                    test: /\.jsx?$/,
-                    use: [
-                        'babel-loader?cacheDirectory'
-                    ]
-                },
+                ...BaseConfig.baseTSLoader,
+
                 {
                     test: /\.less$/,
                     use: ExtractTextPlugin.extract({
                         fallback: 'isomorphic-style-loader',
                         use: [
-                            ...baseCSSLoader,
+                            ...BaseConfig.baseCSSLoader,
                             {
                                 loader: 'less-loader'
                             }
@@ -212,18 +124,11 @@ module.exports = [
                     use: ExtractTextPlugin.extract({
                         fallback: 'isomorphic-style-loader',
                         use: [
-                            ...baseCSSLoader
+                            ...BaseConfig.baseCSSLoader
                         ]
                     })
                 },
-                {
-                    test: /\.(jpe?g|png|gif)/,
-                    // loader: [
-                    //     'url?limit=4000&name=images/[name][hash:8].[ext]',
-                    //     'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}'
-                    // ]
-                    loader: 'url-loader?limit=4000&name=[name][hash:8].[ext]',
-                },
+                ...BaseConfig.baseUrlLoader
             ]
         },
         plugins: [

@@ -2,25 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const  baseCSSLoader = [
-    {
-        loader: 'css-loader',
-        options: {
-            modules: true,
-            importLoaders: 1,
-            localIdentName: '[name]__[local]-[hash:base64:5]',
-            sourceMap: true
-        }
-    },
-    {
-        loader: 'postcss-loader',
-        options: {
-            plugins: (loader) => [
-                require('autoprefixer')({ browsers: ['last 3 versions', 'iOS 9'] }),
-            ]
-        }
-    }
-];
+const { baseCSSLoader, baseUrlLoader, baseFileLoader, baseTSLoader } = require('./config/base');
 
 module.exports = [
     {
@@ -46,41 +28,9 @@ module.exports = [
         devtool: "cheap-module-eval-source-map",
         module: {
             rules: [
-                {
-                    exclude: [
-                        /\.html$/,
-                        /\.(ts|tsx)$/,
-                        /\.(js|jsx)$/,
-                        /\.css$/,
-                        /\.less$/,
-                        /\.json$/,
-                        /\.bmp$/,
-                        /\.gif$/,
-                        /\.jpe?g$/,
-                        /\.png$/,
-                      ],
-                      loader: require.resolve('file-loader'),
-                      options: {
-                        name: '[name].[hash:8].[ext]',
-                      },
-                },
+                ...baseFileLoader,
 
-                {
-                    test: /\.tsx?$/,
-                    use: [
-                        'babel-loader?cacheDirectory',
-                        {
-                            loader: 'ts-loader',
-                        }
-                    ],
-                    exclude: /node_modules/
-                },
-                {
-                    test: /\.jsx?$/,
-                    use: [
-                        'babel-loader?cacheDirectory'
-                    ]
-                },
+                ...baseTSLoader,
                 {
                     test: /\.less$/,
                     use: [
@@ -127,40 +77,9 @@ module.exports = [
         },
         module: {
             rules: [
-                {
-                    exclude: [
-                        /\.html$/,
-                        /\.(ts|tsx)$/,
-                        /\.(js|jsx)$/,
-                        /\.css$/,
-                        /\.less$/,
-                        /\.json$/,
-                        /\.bmp$/,
-                        /\.gif$/,
-                        /\.jpe?g$/,
-                        /\.png$/,
-                      ],
-                      loader: require.resolve('file-loader'),
-                      options: {
-                        name: '[name].[hash:8].[ext]',
-                      },
-                },
-                {
-                    test: /\.tsx?$/,
-                    use: [
-                        'babel-loader?cacheDirectory',
-                        {
-                            loader: 'ts-loader',
-                        }
-                    ],
-                    exclude: /node_modules/
-                },
-                {
-                    test: /\.jsx?$/,
-                    use: [
-                        'babel-loader?cacheDirectory'
-                    ]
-                },
+                ...baseFileLoader,
+
+                ...baseTSLoader,
                 {
                     test:/\.less$/,
                     use:[
@@ -176,14 +95,7 @@ module.exports = [
                         ...baseCSSLoader
                     ]
                 },
-                {
-                    test: /\.(jpe?g|png|gif)/,
-                    // loader: [
-                    //     'url?limit=4000&name=images/[name][hash:8].[ext]',
-                    //     'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}'
-                    // ]
-                    loader: 'url-loader?limit=4000&name=[name][hash:8].[ext]',
-                },
+                ...baseUrlLoader,
             ]
         },
 
