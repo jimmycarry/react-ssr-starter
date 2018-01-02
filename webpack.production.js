@@ -85,18 +85,24 @@ module.exports = [
                 },
                 {
                     test: /\.less$/,
-                    use: [
-                        'style-loader',
-                        ...baseCSSLoader,
-                        'less-loader',
-                    ]
+                    use: ExtractTextPlugin.extract({
+                        fallback: 'isomorphic-style-loader',
+                        use: [
+                            ...baseCSSLoader,
+                            {
+                                loader: 'less-loader'
+                            }
+                        ]
+                    })
                 },
                 {
-                    test: /\.css/,
-                    use: [
-                        'style-loader',
-                        ...baseCSSLoader
-                    ]
+                    test: /\.css$/,
+                    use: ExtractTextPlugin.extract({
+                        fallback: 'isomorphic-style-loader',
+                        use: [
+                            ...baseCSSLoader
+                        ]
+                    })
                 },
                 {
                     test: /\.(jpe?g|png|gif)/,
@@ -109,6 +115,10 @@ module.exports = [
             ]
         },
         plugins: [
+            new ExtractTextPlugin({
+                filename: 'styles.css',
+                allChunks: true
+            }),
             new webpack.DefinePlugin({
                 'process.env': {
                     NODE_ENV: '"production"'
