@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "node development.js",
-    "build":"rm -rf ./static&&NODE_ENV=production webpack --config webpack.production.js --progress --profile --colors",
-    "start":"node production.js"
+    "build": "rm -rf ./static&&NODE_ENV=production webpack --config webpack.production.js --progress --profile --colors",
+    "start": "node production.js"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +20,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "express": "^4.16.2",
     "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.6",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "path": "^0.12.7",
     "react": "^16.2.0",
@@ -27,6 +28,7 @@
     "stats-webpack-plugin": "^0.6.1",
     "ts-loader": "^3.2.0",
     "typescript": "^2.6.2",
+    "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
     "webpack-cleanup-plugin": "^0.5.1",
     "webpack-dev-middleware": "^2.0.3",

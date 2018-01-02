@@ -37,7 +37,7 @@ module.exports = [
         'output': {
             path: path.join(__dirname, 'static'),
             filename: '[name].js',
-            publicPath:'/static/'
+            publicPath: '/static/'
         },
         devtool: "source-map",
         resolve: {
@@ -48,6 +48,25 @@ module.exports = [
         },
         module: {
             rules: [
+                {
+                    exclude: [
+                        /\.html$/,
+                        /\.(ts|tsx)$/,
+                        /\.(js|jsx)$/,
+                        /\.css$/,
+                        /\.less$/,
+                        /\.json$/,
+                        /\.bmp$/,
+                        /\.gif$/,
+                        /\.jpe?g$/,
+                        /\.png$/,
+                      ],
+                      loader: require.resolve('file-loader'),
+                      options: {
+                        name: '[name].[hash:8].[ext]',
+                      },
+                },
+
                 {
                     test: /\.tsx?$/,
                     use: [
@@ -65,8 +84,8 @@ module.exports = [
                     ]
                 },
                 {
-                    test:/\.less$/,
-                    use:[
+                    test: /\.less$/,
+                    use: [
                         'style-loader',
                         ...baseCSSLoader,
                         'less-loader',
@@ -78,27 +97,35 @@ module.exports = [
                         'style-loader',
                         ...baseCSSLoader
                     ]
-                }
+                },
+                {
+                    test: /\.(jpe?g|png|gif)/,
+                    // loader: [
+                    //     'url?limit=4000&name=images/[name][hash:8].[ext]',
+                    //     'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}'
+                    // ]
+                    loader: 'url-loader?limit=4000&name=[name][hash:8].[ext]',
+                },
             ]
         },
         plugins: [
-			new webpack.DefinePlugin({
-				'process.env': {
-					NODE_ENV: '"production"'
-				}
+            new webpack.DefinePlugin({
+                'process.env': {
+                    NODE_ENV: '"production"'
+                }
             }),
             // new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js',minChunks:Infinity }),
-			new webpack.optimize.UglifyJsPlugin({
-				compress: {
-					warnings: false,
-					screw_ie8: true,
-					drop_console: true,
-					drop_debugger: true
-				}
+            new webpack.optimize.UglifyJsPlugin({
+                compress: {
+                    warnings: false,
+                    screw_ie8: true,
+                    drop_console: true,
+                    drop_debugger: true
+                }
             }),
             new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js', minChunks: Infinity }),
-			new webpack.optimize.OccurrenceOrderPlugin(),
-		]
+            new webpack.optimize.OccurrenceOrderPlugin(),
+        ]
     },
 
 
@@ -111,8 +138,8 @@ module.exports = [
         output: {
             path: path.join(__dirname, 'static'),
             filename: 'server.js',
-			libraryTarget: 'commonjs2',
-			publicPath: '/static/',
+            libraryTarget: 'commonjs2',
+            publicPath: '/static/',
         },
         devtool: 'source-map',
         resolve: {
@@ -123,6 +150,25 @@ module.exports = [
         },
         module: {
             rules: [
+                {
+                    exclude: [
+                        /\.html$/,
+                        /\.(ts|tsx)$/,
+                        /\.(js|jsx)$/,
+                        /\.css$/,
+                        /\.less$/,
+                        /\.json$/,
+                        /\.bmp$/,
+                        /\.gif$/,
+                        /\.jpe?g$/,
+                        /\.png$/,
+                      ],
+                      loader: require.resolve('file-loader'),
+                      options: {
+                        name: '[name].[hash:8].[ext]',
+                      },
+                },
+
                 {
                     test: /\.tsx?$/,
                     use: [
@@ -146,7 +192,7 @@ module.exports = [
                         use: [
                             ...baseCSSLoader,
                             {
-                                loader:'less-loader'
+                                loader: 'less-loader'
                             }
                         ]
                     })
@@ -159,27 +205,32 @@ module.exports = [
                             ...baseCSSLoader
                         ]
                     })
-                }
+                },
+                {
+                    test: /\.(jpe?g|png|gif)/,
+                    // loader: [
+                    //     'url?limit=4000&name=images/[name][hash:8].[ext]',
+                    //     'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}'
+                    // ]
+                    loader: 'url-loader?limit=4000&name=[name][hash:8].[ext]',
+                },
             ]
         },
         plugins: [
-			new ExtractTextPlugin({
-				filename: 'styles.css',
-				allChunks: true
-			}),
-			new OptimizeCssAssetsPlugin({
-				cssProcessorOptions: { discardComments: { removeAll: true } }
-			}),
-			new StatsPlugin('stats.json', {
-				chunkModules: true,
-				modules: true,
-				chunks: true,
-				exclude: [/node_modules[\\\/]react/],
-			}),
-		]
+            new ExtractTextPlugin({
+                filename: 'styles.css',
+                allChunks: true
+            }),
+            new OptimizeCssAssetsPlugin({
+                cssProcessorOptions: { discardComments: { removeAll: true } }
+            }),
+            new StatsPlugin('stats.json', {
+                chunkModules: true,
+                modules: true,
+                chunks: true,
+                exclude: [/node_modules[\\\/]react/],
+            }),
+        ]
     }
 
-
-
-
-]
+];

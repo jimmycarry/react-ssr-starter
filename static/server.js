@@ -11136,7 +11136,7 @@ exports.default = function (_ref) {
 	var markup = _ref.markup,
 	    helmet = _ref.helmet;
 
-	return "<!doctype html>\n<html " + helmet.htmlAttributes.toString() + ">\n<head>\n\t" + helmet.title.toString() + "\n\t" + helmet.meta.toString() + "\n\t" + helmet.link.toString() + "\n</head>\n<body " + helmet.bodyAttributes.toString() + ">\n\t<div id=\"app\">" + markup + "</div>\n\t<script src=\"/static/vendor.bundle.js\"></script>\n\t<script src=\"/static/client.js\"></script>\n</body>\n</html>";
+	return "<!doctype html>\n  <html " + helmet.htmlAttributes.toString() + ">\n<head>\n\t" + helmet.title.toString() + "\n\t" + helmet.meta.toString() + "\n\t" + helmet.link.toString() + "\n</head>\n<body " + helmet.bodyAttributes.toString() + ">\n\t<div id=\"app\">" + markup + "</div>\n\t<script src=\"/static/vendor.bundle.js\"></script>\n\t<script src=\"/static/client.js\"></script>\n</body>\n</html>";
 };
 
 /***/ }),
@@ -12103,9 +12103,9 @@ var _reactRouterDom = __webpack_require__(14);
 
 var _HomePage = __webpack_require__(81);
 
-var _AboutPage = __webpack_require__(83);
+var _AboutPage = __webpack_require__(84);
 
-var _Menu = __webpack_require__(84);
+var _Menu = __webpack_require__(85);
 
 var _reactHelmet = __webpack_require__(21);
 
@@ -12182,6 +12182,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var styles = __webpack_require__(82);
+var logo = __webpack_require__(83);
 
 var HomePage = exports.HomePage = function (_React$Component) {
     _inherits(HomePage, _React$Component);
@@ -12199,7 +12200,8 @@ var HomePage = exports.HomePage = function (_React$Component) {
                 'div',
                 { className: styles['container'] },
                 React.createElement(_reactHelmet.Helmet, { title: 'welcome to our homepage' }),
-                'This is Home Page'
+                'This is Home Page',
+                React.createElement('img', { src: logo })
             );
         }
     }]);
@@ -12216,6 +12218,12 @@ module.exports = {"container":"homepage__container_9QkSa"};
 
 /***/ }),
 /* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "logo.5d5d9eef.svg";
+
+/***/ }),
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12264,7 +12272,7 @@ var AboutPage = exports.AboutPage = function (_React$Component) {
 }(React.Component);
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

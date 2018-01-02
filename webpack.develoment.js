@@ -28,7 +28,7 @@ module.exports = [
         entry: {
             vendor: ['react', 'react-dom'],
             client: ['webpack-hot-middleware/client?quiet=true&reload=true', './client.tsx']
-    
+
         },
         output: {
             path: path.join(__dirname, 'static'),
@@ -45,6 +45,25 @@ module.exports = [
         devtool: "cheap-module-eval-source-map",
         module: {
             rules: [
+                {
+                    exclude: [
+                        /\.html$/,
+                        /\.(ts|tsx)$/,
+                        /\.(js|jsx)$/,
+                        /\.css$/,
+                        /\.less$/,
+                        /\.json$/,
+                        /\.bmp$/,
+                        /\.gif$/,
+                        /\.jpe?g$/,
+                        /\.png$/,
+                      ],
+                      loader: require.resolve('file-loader'),
+                      options: {
+                        name: '[name].[hash:8].[ext]',
+                      },
+                },
+
                 {
                     test: /\.tsx?$/,
                     use: [
@@ -108,6 +127,24 @@ module.exports = [
         module: {
             rules: [
                 {
+                    exclude: [
+                        /\.html$/,
+                        /\.(ts|tsx)$/,
+                        /\.(js|jsx)$/,
+                        /\.css$/,
+                        /\.less$/,
+                        /\.json$/,
+                        /\.bmp$/,
+                        /\.gif$/,
+                        /\.jpe?g$/,
+                        /\.png$/,
+                      ],
+                      loader: require.resolve('file-loader'),
+                      options: {
+                        name: '[name].[hash:8].[ext]',
+                      },
+                },
+                {
                     test: /\.tsx?$/,
                     use: [
                         'babel-loader?cacheDirectory',
@@ -137,7 +174,15 @@ module.exports = [
                         'isomorphic-style-loader',
                         ...baseCSSLoader
                     ]
-                }
+                },
+                {
+                    test: /\.(jpe?g|png|gif)/,
+                    // loader: [
+                    //     'url?limit=4000&name=images/[name][hash:8].[ext]',
+                    //     'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}'
+                    // ]
+                    loader: 'url-loader?limit=4000&name=[name][hash:8].[ext]',
+                },
             ]
         },
 
@@ -147,8 +192,8 @@ module.exports = [
                     "NODE_ENV": JSON.stringify("development")
                 }
             })
-    
+
         ]
-        
+
     }
 ]
