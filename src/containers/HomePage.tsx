@@ -7,8 +7,13 @@ export class HomePage extends React.Component<{}, {}>{
     render() {
         return (
             <div className={styles['container']} >
-                <Helmet title={'welcome to our homepage'} />
-                This is Home Page
+                <Helmet
+                    title={'welcome to our homepage'}
+                    link={[
+                        { rel: "shortcut icon", href: require('../assets/favicon.ico') }
+                    ]}
+                />
+                This is Home Page Hello
                 <img src={logo} />
             </div>
         )

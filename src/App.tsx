@@ -21,7 +21,7 @@ export class App extends React.Component<{}, {}>{
                         { name: "viewport", content: "width=device-width, initial-scale=1" },
                     ]}
                     link={
-                        [{ href: "/static/styles.css", rel: "stylesheet" }]
+                        process.env.NODE_ENV === 'production' ? [{ href: "/static/styles.css", rel: "stylesheet" }] : undefined
                     }
 				/>
                 <Menu/>

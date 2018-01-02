@@ -86,7 +86,7 @@ module.exports = [
                 {
                     test: /\.less$/,
                     use: ExtractTextPlugin.extract({
-                        fallback: 'isomorphic-style-loader',
+                        fallback: 'style-loader',
                         use: [
                             ...baseCSSLoader,
                             {
@@ -98,7 +98,7 @@ module.exports = [
                 {
                     test: /\.css$/,
                     use: ExtractTextPlugin.extract({
-                        fallback: 'isomorphic-style-loader',
+                        fallback: 'style-loader',
                         use: [
                             ...baseCSSLoader
                         ]

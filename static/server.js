@@ -12103,9 +12103,9 @@ var _reactRouterDom = __webpack_require__(14);
 
 var _HomePage = __webpack_require__(81);
 
-var _AboutPage = __webpack_require__(84);
+var _AboutPage = __webpack_require__(85);
 
-var _Menu = __webpack_require__(85);
+var _Menu = __webpack_require__(86);
 
 var _reactHelmet = __webpack_require__(21);
 
@@ -12138,7 +12138,7 @@ var App = exports.App = function (_React$Component) {
                     'Hello Server Side'
                 ),
                 React.createElement(_reactHelmet.Helmet, { htmlAttributes: { lang: "en", amp: undefined } // amp takes no value
-                    , titleTemplate: '%s | React App', titleAttributes: { itemprop: "name", lang: "en" }, meta: [{ name: "description", content: "Server side rendering example" }, { name: "viewport", content: "width=device-width, initial-scale=1" }], link: [{ href: "/static/styles.css", rel: "stylesheet" }] }),
+                    , titleTemplate: '%s | React App', titleAttributes: { itemprop: "name", lang: "en" }, meta: [{ name: "description", content: "Server side rendering example" }, { name: "viewport", content: "width=device-width, initial-scale=1" }], link: process.env.NODE_ENV === 'production' ? [{ href: "/static/styles.css", rel: "stylesheet" }] : undefined }),
                 React.createElement(_Menu.Menu, null),
                 React.createElement(
                     _reactRouterDom.Switch,
@@ -12199,8 +12199,8 @@ var HomePage = exports.HomePage = function (_React$Component) {
             return React.createElement(
                 'div',
                 { className: styles['container'] },
-                React.createElement(_reactHelmet.Helmet, { title: 'welcome to our homepage' }),
-                'This is Home Page',
+                React.createElement(_reactHelmet.Helmet, { title: 'welcome to our homepage', link: [{ rel: "shortcut icon", href: __webpack_require__(84) }] }),
+                'This is Home Page Hello',
                 React.createElement('img', { src: logo })
             );
         }
@@ -12224,6 +12224,12 @@ module.exports = __webpack_require__.p + "logo.5d5d9eef.svg";
 
 /***/ }),
 /* 84 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "favicon.c92b85a5.ico";
+
+/***/ }),
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12272,7 +12278,7 @@ var AboutPage = exports.AboutPage = function (_React$Component) {
 }(React.Component);
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
