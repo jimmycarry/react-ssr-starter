@@ -8,6 +8,7 @@
             "esnext",
             "dom"
         ],
+        "allowJs": true,
         "allowSyntheticDefaultImports": true,
         "moduleResolution": "node",
         "module": "es2015",
@@ -19,7 +20,7 @@
             "@src/*": ["src/*"] // will enable -> import { ... } from '@src/components'
             // in webpack you need to add -> resolve: { alias: { '@src': PATH_TO_SRC } }
         }
-        
+
     },
     "exclude": [
         "node_modules"

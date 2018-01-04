@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const { baseCSSLoader, baseUrlLoader, baseFileLoader, baseTSLoader } = require('./config/base');
 
