@@ -4,6 +4,8 @@ const webpack = require('webpack');
 const { baseCSSLoader, baseUrlLoader, baseFileLoader, baseTSLoader } = require('./config/base');
 
 module.exports = [
+
+    // CLIENT
     {
         name: 'client',
         target: 'web',
@@ -57,6 +59,11 @@ module.exports = [
             new webpack.HotModuleReplacementPlugin()
         ]
     },
+
+
+
+    // SERVER WEBPACK
+
     {
         name: 'server',
         target: 'node',
@@ -109,4 +116,8 @@ module.exports = [
         ]
 
     }
+
+
+
+
 ]

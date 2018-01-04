@@ -16,6 +16,7 @@ export class HomePage extends React.Component<IProps, {}>{
         super(props);
     }
     componentWillMount() {
+        this.props.HomePage.changeTitle();
     }
     render() {
         return (
