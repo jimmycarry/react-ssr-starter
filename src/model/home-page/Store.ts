@@ -1,18 +1,18 @@
-import { observable, action } from 'mobx';
+import { action, observable } from 'mobx';
 
-interface HomePageModel{
-    title?: string,
+interface IHomePageModel {
+    title?: string;
 }
 
-export interface HomePageProps{
+export interface IHomePageProps {
 
     title?: string;
     changeTitle: () => void;
 }
 
-export class HomePageStore{
+export class HomePageStore {
     @observable title: string = 'Welcome Home Page';
-    constructor({title='Welcome Home Page'}:HomePageModel) {
+    constructor({ title = 'Welcome Home Page' }: IHomePageModel) {
         this.title = title;
     }
     @action.bound

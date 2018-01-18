@@ -1,4 +1,4 @@
-const webpackDev = require('./webpack.develoment');
+const webpackDev = require('./webpack.development');
 const webpackProd = require('./webpack.production');
 console.log(process.env.NODE_ENV);
 const config = process.env.NODE_ENV === 'production' ? webpackProd : webpackDev;

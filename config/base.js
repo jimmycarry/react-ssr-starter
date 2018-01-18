@@ -18,6 +18,17 @@ const baseCSSLoader = [
     }
 ];
 
+const baseLintLoader = [
+    {
+        test: /\.tsx?$/,
+        enforce: 'pre',
+        loader: 'tslint-loader',
+        options: {
+            emitErrors: true
+        }
+    }
+];
+
 const baseFileLoader = [
     {
         exclude: [
@@ -66,6 +77,7 @@ const baseTSLoader = [
 ]
 
 module.exports = {
+    baseLintLoader,
     baseCSSLoader,
     baseFileLoader,
     baseUrlLoader,

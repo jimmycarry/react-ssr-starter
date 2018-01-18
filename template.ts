@@ -1,7 +1,7 @@
-import { appStore } from '@src/AppStore';
+import { appStore } from './src/AppStore';
 
 export default ({ markup, helmet }) => {
-  return `<!doctype html>
+    return `<!doctype html>
   <html ${helmet.htmlAttributes.toString()}>
 <head>
 	${helmet.title.toString()}
@@ -17,4 +17,4 @@ export default ({ markup, helmet }) => {
 	<script src="/static/client.js"></script>
 </body>
 </html>`;
-}
+};

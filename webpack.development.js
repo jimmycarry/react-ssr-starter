@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const { baseCSSLoader, baseUrlLoader, baseFileLoader, baseTSLoader } = require('./config/base');
+const { baseLintLoader, baseCSSLoader, baseUrlLoader, baseFileLoader, baseTSLoader } = require('./config/base');
 
 module.exports = [
 
@@ -29,6 +29,7 @@ module.exports = [
         devtool: "cheap-module-eval-source-map",
         module: {
             rules: [
+                ...baseLintLoader,
                 ...baseFileLoader,
 
                 ...baseTSLoader,
