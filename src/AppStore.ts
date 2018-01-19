@@ -1,4 +1,4 @@
-import { HomePageStore } from './model/home-page/Store';
+import { HomePageStore } from '@src/containers/HomePage/Store';
 
 export interface IAppStore {
     HomePage?: HomePageStore;

@@ -1,6 +1,6 @@
 import { appStore } from './src/AppStore';
 
-export default ({ markup, helmet }) => {
+export default ({ markup, helmet, props }) => {
     return `<!doctype html>
   <html ${helmet.htmlAttributes.toString()}>
 <head>
@@ -9,6 +9,7 @@ export default ({ markup, helmet }) => {
     ${helmet.link.toString()}
     <script>
         window.initialState=${JSON.stringify(appStore)};
+        window.initialProps =${JSON.stringify(props)};
     </script>
 </head>
 <body ${helmet.bodyAttributes.toString()}>

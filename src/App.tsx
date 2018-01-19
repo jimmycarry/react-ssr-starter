@@ -1,14 +1,19 @@
-import { Menu } from '@src/Menu';
 import { ContainerRoutes } from '@src/Routes';
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { Route, Switch } from 'react-router-dom';
 
-export class App extends React.Component<{}, {}> {
+require('./index.less');
+
+interface IAppProps {
+    initialData?: any[];
+}
+
+export class App extends React.Component<IAppProps, {}> {
     render() {
+        console.log(this.props);
         return (
-            <div>
-                <h1>Hello Server Side</h1>
+            <div className='react-app'>
                 <Helmet
                     htmlAttributes={{ lang: 'en', amp: undefined }} // amp takes no value
                     titleTemplate='%s | React App'
@@ -23,11 +28,13 @@ export class App extends React.Component<{}, {}> {
                             : undefined
                     }
                 />
-                <Menu />
                 <Switch>
                     {
                         ContainerRoutes.map((item, index) => {
-                            return <Route {...item} key={index} />;
+                            const routeProps = {
+                                initialData: this.props.initialData ? this.props.initialData[index] : undefined
+                            };
+                            return <Route {...item} key={index} {...routeProps} />;
                         })
                     }
                 </Switch>

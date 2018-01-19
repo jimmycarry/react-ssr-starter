@@ -47,7 +47,8 @@ module.exports = [
                         'style-loader',
                         ...baseCSSLoader
                     ]
-                }
+                },
+                ...baseUrlLoader
             ]
         },
         plugins: [
